@@ -33,7 +33,7 @@ public:
     Chain();
     void setNext(Chain* link);
     void addNext(Chain* link);
-    virtual void chain(std::string command);
+    virtual void chain(std::string command, std::string player);
 };
 
 

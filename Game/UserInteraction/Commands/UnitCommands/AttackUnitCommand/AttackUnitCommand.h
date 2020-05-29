@@ -15,7 +15,7 @@
 class AttackUnitCommand : public ICommand
 {
 public:
-    AttackUnitCommand(Field* field) : ICommand(field) {};
+    AttackUnitCommand(Field* field, std::string player) : ICommand(field) {this->player = player;};
     void Command() override ;
 private:
     int x, y, i, j;

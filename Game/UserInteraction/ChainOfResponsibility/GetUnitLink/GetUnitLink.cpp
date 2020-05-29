@@ -4,12 +4,12 @@
 
 #include "GetUnitLink.h"
 
-void GetUnitLink::chain(std::string command)
+void GetUnitLink::chain(std::string command, std::string player)
 {
     if (command == "/get_unit")
     {
-        ICommand* Command = new GetUnitCommand(field);
+        ICommand* Command = new GetUnitCommand(field, player);
         Command->Command();
     }
-    else Chain::chain(command);
+    else Chain::chain(command, player);
 }

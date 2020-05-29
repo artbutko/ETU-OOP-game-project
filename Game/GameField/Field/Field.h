@@ -42,7 +42,7 @@ class Field
     friend class Snapshot;
 
 public:
-    Field(int height, int width);
+    Field(int height, int width, int numberOfPlayers);
     ~Field();
 
     int addObject(Object* object, int x, int y);
@@ -50,7 +50,7 @@ public:
     int deleteObject(int x, int y);
     void makeDamage(int x, int y, int i, int j);
 
-    int createBase(int x, int y, int unitLimit);
+    int createBase(int x, int y, int unitLimit, char id, int number);
 
     /* конструкторы копирования и перемещения */
     Field(const Field& other);
@@ -63,25 +63,28 @@ public:
     FieldIterator *end();
 
     /* печать поля в консоль*/
-    void show();
+    void show(char side);
 
     /* мгновенная смерть */
     void immediateDeath(int x, int y);
 
     Object* getObject(int x, int y);
 
+    void getVision(char side, int x, int y);
+
     Snapshot* createSnapshot(std::string mode);
 
 public:
+    std::vector <Base*> basesOnField;
     Base* base;
     int height;
     int width;
     int objLimit;
     LoggingProxy* logging;
+    Tale** field;
 private:
     int objCount;
-
-    Tale** field;
+    int numberOfPlayers;
     LandscapeFactory landscapeFactory;
     ObjectFactory neutralFactory;
     ObjectFactory unitFactory;

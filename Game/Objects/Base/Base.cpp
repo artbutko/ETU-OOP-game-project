@@ -14,7 +14,7 @@ Base::Base(Field *field, int x, int y, int unitLimit)
     this->unitDead = 0;
     this->health.set(1000);
     this->damage.set(60, 2, 0);
-    this->id = 'B';
+    this->gold = 3;
     unitsOnBase['M'] = 0;
     unitsOnBase['W'] = 0;
     unitsOnBase['A'] = 0;
@@ -38,6 +38,12 @@ int Base::createUnit(char id)
     }
     else
     {
+        if (gold == 0)
+        {
+            std::cout << "ERROR: you don't have gold" << std::endl;
+            return 1;
+        }
+        gold--;
         unitsOnBase[id] += 1;
         unitCount++;
     }
@@ -46,7 +52,10 @@ int Base::createUnit(char id)
 
 void Base::getInformation()
 {
-    std::cout <<  "=========== BASE INFORMATION ==========" << std::endl;
+
+    if (this->id == 'B') std::cout <<  "============= BRIGHT KINDOM ============" << std::endl;
+    else if (this->id == 'D') std::cout <<  "============== DARK KINDOM =============" << std::endl;
+    else std::cout <<  "============= UNDEAD KINDOM ============" << std::endl;
     std::cout <<  "HEALTH: " << this->health.get() << std::endl;
     std::cout <<  "DAMAGE: " << this->damage.getDamage() << std::endl;
     std::cout <<  "------------ UNITS ON BASE ------------" << std::endl;
@@ -108,6 +117,7 @@ IUnit* Base::getUnit(char id)
                 std::cout << "ERROR: wrong unit id!" << std::endl;
                 return nullptr;
         }
+        unit->baseID = this->id;
         unitsOnField.addUnit(unit);
         unit->addFollower(this);
         unit->x = this->x;

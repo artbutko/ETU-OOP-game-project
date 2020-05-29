@@ -4,12 +4,12 @@
 
 #include "BaseInfoLink.h"
 
-void BaseInfoLink::chain(std::string command)
+void BaseInfoLink::chain(std::string command, std::string player)
 {
     if (command == "/info_base")
     {
-        ICommand* Command = new BaseInfoCommand(field);
+        ICommand* Command = new BaseInfoCommand(field, player);
         Command->Command();
     }
-    else Chain::chain(command);
+    else Chain::chain(command, player);
 }

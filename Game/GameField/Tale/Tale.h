@@ -26,6 +26,9 @@ public:
     Object* object;
     INeutral* neutral;
     ILandscape* landscape;
+    bool isBrightView;
+    bool isDarkView;
+    bool isUndeadView;
     int x, y;
 };
 

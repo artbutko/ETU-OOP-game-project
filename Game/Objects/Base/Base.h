@@ -47,14 +47,15 @@ public:
     void update(Subject* subject) override ;
     int y, x;
     int unitLimit;
+    int gold;
 
     UnitComposite unitsOnField;
+    int unitDead;
 private:
     std::map<char, int> unitsOnBase;
     ObjectFactory unitFactory;
     Field* field;
     int unitCount;
-    int unitDead;
 };
 
 

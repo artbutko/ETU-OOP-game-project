@@ -4,12 +4,12 @@
 
 #include "LoggingLink.h"
 
-void LoggingLink::chain(std::string command)
+void LoggingLink::chain(std::string command, std::string player)
 {
     if (command == "/logging")
     {
         ICommand* Command = new LoggingCommand(field);
         Command->Command();
     }
-    else Chain::chain(command);
+    else Chain::chain(command, player);
 }

@@ -4,12 +4,12 @@
 
 #include "GameSaveLink.h"
 
-void GameSaveLink::chain(std::string command)
+void GameSaveLink::chain(std::string command, std::string player)
 {
     if (command == "/game")
     {
         ICommand* Command = new GameSaveCommand(field);
         Command->Command();
     }
-    else Chain::chain(command);
+    else Chain::chain(command, player);
 }

@@ -15,7 +15,7 @@
 class BaseInfoCommand : public ICommand
 {
 public:
-    BaseInfoCommand(Field* field) : ICommand(field) {};
+    BaseInfoCommand(Field* field, std::string player) : ICommand(field) {this->player = player;};
     void Command() override;
 };
 

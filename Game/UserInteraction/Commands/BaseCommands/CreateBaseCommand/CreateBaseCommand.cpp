@@ -14,5 +14,5 @@ void CreateBaseCommand::Command()
     std::cout << "limit = ";
     std::cin >> this->unitLimit;
     std::cout << "---------------------------" << std::endl;
-    field->createBase(x, y, unitLimit);
+    field->createBase(x, y, unitLimit, 'B', 0);
 }

@@ -4,13 +4,15 @@
 
 #include "Field.h"
 
-Field::Field(int height, int width)
+Field::Field(int height, int width, int numberOfPlayers)
 {
     this->height = height;
     this->width = width;
     this->objCount = 0;
     this->objLimit = width * height;
-    this->base = nullptr;
+    this->numberOfPlayers = numberOfPlayers;
+    basesOnField.resize(numberOfPlayers);
+    for (int i = 0; i != numberOfPlayers; ++i) basesOnField[numberOfPlayers] = nullptr;
     this->logging = new LoggingProxy;
     int land;
     int neutral;
@@ -39,6 +41,10 @@ Field::Field(int height, int width)
             field[i][j].object = nullptr;
             field[i][j].x = i;
             field[i][j].y = j;
+
+            field[i][j].isBrightView = false;
+            field[i][j].isDarkView = false;
+            field[i][j].isUndeadView = false;
         }
 }
 
@@ -112,6 +118,8 @@ int Field::addObject(Object *object, int x, int y)
     field[x][y].y = y;
     field[x][y].object->x = x;
     field[x][y].object->y = y;
+
+    std::cout << field[x][y].object->baseID << std::endl;
     logging->loggingGetUnit(field[x][y].object, x, y);
     objCount++;
     return 0;
@@ -142,6 +150,13 @@ int Field::moveObject(int x, int y, int i, int j)
 
         field[i][j].object = field[x][y].object;
         field[x][y].object = nullptr;
+
+        if (field[i][j].object->health.get() < 0)
+        {
+            std::cout << field[i][j].object->id << " is dead!" << std::endl;
+            field[i][j].object->death();
+            this->deleteObject(i, j);
+        }
     }
     else
     {
@@ -166,7 +181,7 @@ int Field::deleteObject(int x, int y)
     return 0;
 }
 
-void Field::show()
+void Field::show(char side)
 {
     std::cout << "[\\]";
     for (int i = 0; i < width; ++i)
@@ -180,12 +195,54 @@ void Field::show()
             bool isNeutral = (field[i][j].neutral != nullptr);
             bool isObject = (field[i][j].object != nullptr);
             bool isLandscape = (field[i][j].landscape != nullptr);
-            if (!isNeutral && !isObject && !isLandscape) std::cout << "[ ]";
-            else if (isObject && !isLandscape) std::cout << '[' << field[i][j].object->id << ']';
-            else if (!isObject && isLandscape && isNeutral) std::cout << field[i][j].landscape->getID() << field[i][j].neutral->id << field[i][j].landscape->getID();
-            else if (!isObject && !isNeutral && isLandscape) std::cout << field[i][j].landscape->getID() << ' ' << field[i][j].landscape->getID();
-            else if (isLandscape && isObject) std::cout << field[i][j].landscape->getID() << field[i][j].object->id << field[i][j].landscape->getID();
-            else std::cout << '[' << field[i][j].neutral->id << ']';
+            if (side == 'M')
+            {
+                if (isNeutral) std::cout << "[" << field[i][j].neutral->id << "]";
+                else if (isObject && (field[i][j].object->id == 'B' || field[i][j].object->id == 'D'||  field[i][j].object->id == 'U')) std::cout << "{" << field[i][j].object->id << "}";
+                else std::cout << "[ ]";
+                if (isObject && (field[i][j].object->id == 'B' || field[i][j].object->id == 'D'||  field[i][j].object->id == 'U'))
+                {
+                    field[i][j].isBrightView = true;
+                    field[i][j].isUndeadView = true;
+                    field[i][j].isDarkView = true;
+                }
+            }
+            else if (side == 'B')
+            {
+                bool isVision = field[i][j].isBrightView;
+                if (!isVision) std::cout << "( )";
+                else if (isObject && (field[i][j].object->id == 'B' || field[i][j].object->id == 'D'||  field[i][j].object->id == 'U')) std::cout << "{" << field[i][j].object->id << "}";
+                else if (isLandscape && isObject && field[i][j].object != nullptr) std::cout << field[i][j].landscape->getID() << field[i][j].object->id << field[i][j].landscape->getID();
+                else if (!isLandscape && isObject && field[i][j].object != nullptr) std::cout << "[" << field[i][j].object->id << "]";
+                else if (isLandscape && isNeutral) std::cout << field[i][j].landscape->getID() << field[i][j].neutral->id << field[i][j].landscape->getID();
+                else if (!isLandscape && isNeutral) std::cout << "[" << field[i][j].neutral->id << "]";
+                else if (isLandscape) std::cout << field[i][j].landscape->getID() << " " << field[i][j].landscape->getID();
+                else std::cout << "[ ]";
+            }
+            else if (side == 'D')
+            {
+                bool isVision = field[i][j].isDarkView;
+                if (!isVision) std::cout << "( )";
+                else if (isObject && (field[i][j].object->id == 'B' || field[i][j].object->id == 'D'||  field[i][j].object->id == 'U')) std::cout << "{" << field[i][j].object->id << "}";
+                else if (isLandscape && isObject && field[i][j].object != nullptr) std::cout << field[i][j].landscape->getID() << field[i][j].object->id << field[i][j].landscape->getID();
+                else if (!isLandscape && isObject && field[i][j].object != nullptr) std::cout << "[" << field[i][j].object->id << "]";
+                else if (isLandscape && isNeutral) std::cout << field[i][j].landscape->getID() << field[i][j].neutral->id << field[i][j].landscape->getID();
+                else if (!isLandscape && isNeutral) std::cout << "[" << field[i][j].neutral->id << "]";
+                else if (isLandscape) std::cout << field[i][j].landscape->getID() << " " << field[i][j].landscape->getID();
+                else std::cout << "[ ]";
+            }
+            else if (side == 'U')
+            {
+                bool isVision = field[i][j].isUndeadView;
+                if (!isVision) std::cout << "( )";
+                else if (isObject && (field[i][j].object->id == 'B' || field[i][j].object->id == 'D'||  field[i][j].object->id == 'U')) std::cout << "{" << field[i][j].object->id << "}";
+                else if (isLandscape && isObject) std::cout << field[i][j].landscape->getID() << field[i][j].object->id << field[i][j].landscape->getID();
+                else if (!isLandscape && isObject) std::cout << "[" << field[i][j].object->id << "]";
+                else if (isLandscape && isNeutral) std::cout << field[i][j].landscape->getID() << field[i][j].neutral->id << field[i][j].landscape->getID();
+                else if (!isLandscape && isNeutral) std::cout << "[" << field[i][j].neutral->id << "]";
+                else if (isLandscape) std::cout << field[i][j].landscape->getID() << " " << field[i][j].landscape->getID();
+                else std::cout << "[ ]";
+            }
         }
         std::cout << std::endl;
     }
@@ -204,36 +261,67 @@ FieldIterator *Field::iterator()
     return (new FieldIterator(*this));
 }
 
-FieldIterator *Field::end() {
+FieldIterator *Field::end()
+{
     auto* end = new FieldIterator(*this);
     end->end();
     return end;
 }
 
-FieldIterator* Field::begin() {
+FieldIterator* Field::begin()
+{
     auto* begin = new FieldIterator(*this);
     begin->begin();
     return begin;
 }
 
-int Field::createBase(int x, int y, int unitLimit)
+int Field::createBase(int x, int y, int unitLimit, char id, int number)
 {
     if (x + 1 < height && y + 1 < width && x >= 0 && y >= 0)
     {
         if (field[x][y].object == nullptr && field[x + 1][y + 1].object == nullptr && field[x][y + 1].object == nullptr && field[x + 1][y].object == nullptr)
         {
-            base = new Base(this, x, y, unitLimit);
-            base->x = x;
-            base->y = y;
-            field[x][y].object = base;
+            basesOnField[number] = new Base(this, x, y, unitLimit);
+            basesOnField[number]->x = x;
+            basesOnField[number]->y = y;
+            basesOnField[number]->id = id;
+            field[x][y].object = basesOnField[number];
             field[x + 1][y].object = field[x][y].object;
             field[x][y + 1].object = field[x][y].object;
             field[x + 1][y + 1].object = field[x][y].object;
-            logging->loggingCreateBase(base);
+            logging->loggingCreateBase(basesOnField[number]);
             field[x][y].landscape = nullptr;
             field[x + 1][y].landscape = nullptr;
             field[x][y + 1].landscape = nullptr;
             field[x + 1][y + 1].landscape = nullptr;
+            field[x][y].neutral = nullptr;
+            field[x + 1][y].neutral = nullptr;
+            field[x][y + 1].neutral = nullptr;
+            field[x + 1][y + 1].neutral = nullptr;
+            if (number == 0)
+            {
+                field[x + 2][y].isBrightView = true;
+                field[x + 2][y + 1].isBrightView = true;
+                field[x + 2][y + 2].isBrightView = true;
+                field[x + 1][y + 2].isBrightView = true;
+                field[x][y + 2].isBrightView = true;
+            }
+            else if (number == 1)
+            {
+                field[x - 1][y].isDarkView = true;
+                field[x - 1][y + 1].isDarkView = true;
+                field[x - 1][y - 1].isDarkView = true;
+                field[x][y - 1].isDarkView = true;
+                field[x + 1][y - 1].isDarkView = true;
+            }
+            else if (number == 2)
+            {
+                field[x - 1][y].isUndeadView = true;
+                field[x - 1][y + 1].isUndeadView = true;
+                field[x - 1][y + 2].isUndeadView = true;
+                field[x][y + 2].isUndeadView = true;
+                field[x + 1][y + 2].isUndeadView = true;
+            }
 
         }
     }
@@ -285,3 +373,44 @@ Snapshot* Field::createSnapshot(std::string mode)
     return snap;
 }
 
+
+void Field::getVision(char side, int x, int y)
+{
+
+    if (side == 'B')
+    {
+        field[x][y].isBrightView = true;
+        if (x + 1 < height) field[x + 1][y].isBrightView = true;
+        if (x - 1 >= 0) field [x - 1][y].isBrightView = true;
+        if (y + 1 < width) field[x][y + 1].isBrightView = true;
+        if (y - 1 >= 0) field[x][y - 1].isBrightView = true;
+        if (x + 1 < height && y - 1 >= 0) field[x + 1][y - 1].isBrightView = true;
+        if (x + 1 < height && y + 1 < width) field[x + 1][y + 1].isBrightView = true;
+        if (x - 1 >= height && y - 1 >= 0) field[x - 1][y - 1].isBrightView = true;
+        if (x - 1 < height && y + 1 < width) field[x - 1][y + 1].isBrightView = true;
+    }
+    else if (side == 'D')
+    {
+        field[x][y].isDarkView = true;
+        if (x + 1 < height) field[x + 1][y].isDarkView = true;
+        if (x - 1 >= 0) field [x - 1][y].isDarkView = true;
+        if (y + 1 < width) field[x][y + 1].isDarkView  = true;
+        if (y - 1 >= 0) field[x][y - 1].isDarkView  = true;
+        if (x + 1 < height && y - 1 >= 0) field[x + 1][y - 1].isDarkView = true;
+        if (x + 1 < height && y + 1 < width) field[x + 1][y + 1].isDarkView = true;
+        if (x - 1 >= height && y - 1 >= 0) field[x - 1][y - 1].isDarkView = true;
+        if (x - 1 < height && y + 1 < width) field[x - 1][y + 1].isDarkView = true;
+    }
+    else
+    {
+        field[x][y].isUndeadView = true;
+        if (x + 1 < height) field[x + 1][y].isUndeadView = true;
+        if (x - 1 >= 0) field[x - 1][y].isUndeadView = true;
+        if (y + 1 < width) field[x][y + 1].isUndeadView  = true;
+        if (y - 1 >= 0) field[x][y - 1].isUndeadView  = true;
+        if (x + 1 < height && y - 1 >= 0) field[x + 1][y - 1].isUndeadView = true;
+        if (x + 1 < height && y + 1 < width) field[x + 1][y + 1].isUndeadView = true;
+        if (x - 1 >= height && y - 1 >= 0) field[x - 1][y - 1].isUndeadView = true;
+        if (x - 1 < height && y + 1 < width) field[x - 1][y + 1].isUndeadView = true;
+    }
+}

@@ -28,7 +28,7 @@ void Chain::addNext(Chain *link)
 
 }
 
-void Chain::chain(std::string command)
+void Chain::chain(std::string command, std::string player)
 {
-    next->chain(command);
+    next->chain(command, player);
 }

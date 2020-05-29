@@ -16,7 +16,7 @@ class CreateBaseLink : public Chain
 {
 public:
     CreateBaseLink(Field* field) : Chain(field) {};
-    void chain(std::string command) override;
+    void chain(std::string command, std::string player) override;
 };
 
 

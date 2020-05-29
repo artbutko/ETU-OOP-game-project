@@ -4,7 +4,7 @@
 
 #include "UnknownLink.h"
 
-void UnknownLink::chain(std::string command)
+void UnknownLink::chain(std::string command, std::string player)
 {
     ICommand* Command = new UnknownCommand();
     Command->Command();

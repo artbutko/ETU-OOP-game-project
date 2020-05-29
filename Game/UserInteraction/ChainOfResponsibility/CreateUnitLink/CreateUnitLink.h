@@ -16,7 +16,7 @@ class CreateUnitLink : public Chain
 {
 public:
     CreateUnitLink(Field* field) : Chain(field) {};
-    virtual void chain(std::string command) override;
+    virtual void chain(std::string command, std::string player) override;
 };
 
 

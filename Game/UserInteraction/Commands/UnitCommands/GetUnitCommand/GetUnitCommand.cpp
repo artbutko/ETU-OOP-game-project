@@ -6,7 +6,11 @@
 
 void GetUnitCommand::Command()
 {
-    if (this->field->base != nullptr)
+    int number;
+    if (player == "B") number = 0;
+    else if (player == "D") number = 1;
+    else number = 2;
+    if (this->field->basesOnField[number]!= nullptr)
     {
         std::cout << "--------- GET UNIT --------" << std::endl;
         std::cout << "'C' - Crossbowman" << std::endl;
@@ -23,7 +27,7 @@ void GetUnitCommand::Command()
         std::cout << "y = " ;
         std::cin >> this->y;
         std::cout << "---------------------------" << std::endl;
-        field->addObject(field->base->getUnit(this->id), this->x, this->y);
+        field->addObject(this->field->basesOnField[number]->getUnit(this->id), this->x, this->y);
     }
     else std::cout << "ERROR: Base doesn't exist!" << std::endl;
 }

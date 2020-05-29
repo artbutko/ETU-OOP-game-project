@@ -4,12 +4,12 @@
 
 #include "MoveUnitLink.h"
 
-void MoveUnitLink::chain(std::string command)
+void MoveUnitLink::chain(std::string command, std::string player)
 {
     if (command == "/move_unit")
     {
-        ICommand* Command = new MoveUnitCommand(field);
+        ICommand* Command = new MoveUnitCommand(field, player);
         Command->Command();
     }
-    else Chain::chain(command);
+    else Chain::chain(command, player);
 }

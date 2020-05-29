@@ -103,7 +103,7 @@ Field* Snapshot::loadGame()
 
     /* FIELD */
     stream >> height >> width >> objectLimit;
-    Field newField(height, width);
+    Field newField(height, width, 2);
 
     *(this->field) = newField;
 
@@ -155,12 +155,12 @@ Field* Snapshot::loadGame()
     }
 
     /* BASE */
-    stream >> flag;
+   /* stream >> flag;
     if (flag)
     {
-        int unitLim, unitCount, baseHealth, deadCount;
+        int unitLim, unitCount, baseHealth, deadCount, number, id;
         stream >> x >> y >> unitLim >> unitCount >> baseHealth >> deadCount;
-        field->createBase(x, y, unitLim);
+        field->createBase(x, y, unitLim, id, number);
         field->base->unitDead = deadCount;
 
         char unit;
@@ -211,7 +211,8 @@ Field* Snapshot::loadGame()
             field->base->unitLimit--;
         }
     }
-
-    file->~File();
+ */
+    return field; //deleteit
+    //file->~File();
 }
 

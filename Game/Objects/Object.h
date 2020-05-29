@@ -36,7 +36,7 @@ public:
     int x, y;
     char id;
     void death();
-
+    char baseID;
     virtual void getInformation();
 };
 

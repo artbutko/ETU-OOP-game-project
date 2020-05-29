@@ -15,7 +15,7 @@
 class MoveUnitCommand : public ICommand
 {
 public:
-    MoveUnitCommand(Field* field) : ICommand(field) {};
+    MoveUnitCommand(Field* field, std::string player) : ICommand(field) {this->player = player;};
     void Command() override;
 private:
     int x, y, i, j;

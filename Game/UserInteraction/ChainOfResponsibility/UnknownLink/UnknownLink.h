@@ -15,7 +15,7 @@ class UnknownLink : public Chain
 {
 public:
     UnknownLink(Field* field) : Chain(field) {};
-    void chain(std::string command) override;
+    void chain(std::string command, std::string player) override;
 };
 
 

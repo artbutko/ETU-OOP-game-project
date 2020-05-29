@@ -35,4 +35,5 @@ private:
 };
 
 
+
 #endif //OOP_NEW_SNAPSHOT_H

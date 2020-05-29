@@ -20,6 +20,7 @@ public:
 protected:
     ICommand(Field* Field) : field(Field) {};
     Field* field;
+    std::string player;
 };
 
 

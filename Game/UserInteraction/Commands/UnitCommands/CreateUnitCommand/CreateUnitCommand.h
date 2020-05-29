@@ -15,7 +15,7 @@
 class CreateUnitCommand : public ICommand
 {
 public:
-    CreateUnitCommand(Field* field) : ICommand(field) {}
+    CreateUnitCommand(Field* field, std::string player) : ICommand(field) {this->player = player;}
     void Command() override ;
 private:
     char id;
