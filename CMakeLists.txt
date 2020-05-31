@@ -1,6 +1,167 @@
 cmake_minimum_required(VERSION 3.15)
-project(OOP_new)
+project(GAME)
 
 set(CMAKE_CXX_STANDARD 17)
 
-add_executable(OOP_new Game/UserInteraction/main.cpp Game/Objects/Attributes/Damage/Damage.cpp Game/Objects/Attributes/Damage/Damage.h Game/Objects/Attributes/Health/Health.cpp Game/Objects/Attributes/Health/Health.h Game/Objects/Attributes/Mana/Mana.cpp Game/Objects/Attributes/Mana/Mana.h Game/Objects/Units/Magicians/Magician.cpp Game/Objects/Units/Magicians/Magician.h Game/Objects/Units/Shooters/Shooter.cpp Game/Objects/Units/Shooters/Shooter.h Game/Objects/Units/Warriors/Warrior.cpp Game/Objects/Units/Warriors/Warrior.h Game/Objects/Units/Magicians/Wizard/Wizard.cpp Game/Objects/Units/Magicians/Wizard/Wizard.h Game/Objects/Units/Shooters/Archer/Archer.cpp Game/Objects/Units/Shooters/Archer/Archer.h Game/Objects/Units/Shooters/Crossbowman/Crossbowman.cpp Game/Objects/Units/Shooters/Crossbowman/Crossbowman.h Game/Objects/Units/IUnit.cpp Game/Objects/Units/IUnit.h Game/Objects/Object.cpp Game/Objects/Object.h Game/Objects/Attributes/Range/Range.cpp Game/Objects/Attributes/Range/Range.h Game/Objects/Units/Warriors/Spearman/Spearman.cpp Game/Objects/Units/Warriors/Spearman/Spearman.h Game/Objects/Units/Warriors/Knight/Knight.cpp Game/Objects/Units/Warriors/Knight/Knight.h Game/Objects/Units/Warriors/Knight/Knight.cpp Game/Objects/Units/Warriors/Knight/Knight.h Game/Objects/Units/Magicians/Mage/Mage.cpp Game/Objects/Units/Magicians/Mage/Mage.h Game/GameField/Field/Field.cpp Game/GameField/Field/Field.h Game/GameField/Tale/Tale.cpp Game/GameField/Tale/Tale.h Game/Factories/ObjectFactory/ObjectFactory.cpp Game/Factories/ObjectFactory/ObjectFactory.h Game/GameField/Field/Iterator/FieldIterator.cpp Game/GameField/Field/Iterator/FieldIterator.h Game/Landscape/ILandscape.cpp Game/Landscape/ILandscape.h Game/Landscape/Water/Water.cpp Game/Landscape/Water/Water.h Game/Landscape/Mountain/Mountain.cpp Game/Landscape/Mountain/Mountain.h Game/Landscape/Forest/Forest.cpp Game/Landscape/Forest/Forest.h Game/Factories/LandscapeFactory/LandscapeFactory.cpp Game/Factories/LandscapeFactory/LandscapeFactory.h Game/Objects/Base/Base.cpp Game/Objects/Base/Base.h Game/Objects/Base/Observer/IObserver.cpp Game/Objects/Base/Observer/IObserver.h Game/Objects/Base/Subject/Subject.cpp Game/Objects/Base/Subject/Subject.h Game/Objects/Units/UnitComposite/UnitComposite.cpp Game/Objects/Units/UnitComposite/UnitComposite.h Game/Objects/Neutral/INeutral.cpp Game/Objects/Neutral/INeutral.h Game/Strategies/INeutralStrategy.cpp Game/Strategies/INeutralStrategy.h Game/Objects/Neutral/AidKit/AidKit.cpp Game/Objects/Neutral/AidKit/AidKit.h Game/Objects/Neutral/Curse/Curse.cpp Game/Objects/Neutral/Curse/Curse.h Game/Objects/Neutral/Potion/Potion.cpp Game/Objects/Neutral/Potion/Potion.h Game/Objects/Neutral/Trap/Trap.cpp Game/Objects/Neutral/Trap/Trap.h Game/Strategies/AidKitStrategy/Refresh.cpp Game/Strategies/AidKitStrategy/Refresh.h Game/Strategies/CurseStrategy/Damn.cpp Game/Strategies/CurseStrategy/Damn.h Game/Strategies/PotionStrategy/ManaUp.cpp Game/Strategies/PotionStrategy/ManaUp.h Game/Strategies/TrapStrategy/HealthDown.cpp Game/Strategies/TrapStrategy/HealthDown.h Game/UserInteraction/GameClass/GameClass.cpp Game/UserInteraction/GameClass/GameClass.h Game/UserInteraction/ChainOfResponsibility/Chain.cpp Game/UserInteraction/ChainOfResponsibility/Chain.h Game/UserInteraction/ChainOfResponsibility/CreateBaseLink/CreateBaseLink.cpp Game/UserInteraction/ChainOfResponsibility/CreateBaseLink/CreateBaseLink.h Game/UserInteraction/ChainOfResponsibility/CreateUnitLink/CreateUnitLink.cpp Game/UserInteraction/ChainOfResponsibility/CreateUnitLink/CreateUnitLink.h Game/UserInteraction/ChainOfResponsibility/GetUnitLink/GetUnitLink.cpp Game/UserInteraction/ChainOfResponsibility/GetUnitLink/GetUnitLink.h Game/UserInteraction/ChainOfResponsibility/MoveUnitLink/MoveUnitLink.cpp Game/UserInteraction/ChainOfResponsibility/MoveUnitLink/MoveUnitLink.h Game/UserInteraction/ChainOfResponsibility/BaseInfoLink/BaseInfoLink.cpp Game/UserInteraction/ChainOfResponsibility/BaseInfoLink/BaseInfoLink.h Game/UserInteraction/ChainOfResponsibility/AttackUnitLink/AttackUnitLink.cpp Game/UserInteraction/ChainOfResponsibility/AttackUnitLink/AttackUnitLink.h Game/UserInteraction/ChainOfResponsibility/UnknownLink/UnknownLink.cpp Game/UserInteraction/ChainOfResponsibility/UnknownLink/UnknownLink.h Game/UserInteraction/Commands/ICommand.cpp Game/UserInteraction/Commands/ICommand.h Game/UserInteraction/Commands/DefaultCommands/UnknownCommand/UnknownCommand.cpp Game/UserInteraction/Commands/DefaultCommands/UnknownCommand/UnknownCommand.h Game/UserInteraction/Commands/BaseCommands/BaseInfoCommand/BaseInfoCommand.cpp Game/UserInteraction/Commands/BaseCommands/BaseInfoCommand/BaseInfoCommand.h Game/UserInteraction/Commands/BaseCommands/CreateBaseCommand/CreateBaseCommand.cpp Game/UserInteraction/Commands/BaseCommands/CreateBaseCommand/CreateBaseCommand.h Game/UserInteraction/Commands/UnitCommands/AttackUnitCommand/AttackUnitCommand.cpp Game/UserInteraction/Commands/UnitCommands/AttackUnitCommand/AttackUnitCommand.h Game/UserInteraction/Commands/UnitCommands/CreateUnitCommand/CreateUnitCommand.cpp Game/UserInteraction/Commands/UnitCommands/CreateUnitCommand/CreateUnitCommand.h Game/UserInteraction/Commands/UnitCommands/GetUnitCommand/GetUnitCommand.cpp Game/UserInteraction/Commands/UnitCommands/GetUnitCommand/GetUnitCommand.h Game/UserInteraction/Commands/UnitCommands/MoveUnitCommand/MoveUnitCommand.cpp Game/UserInteraction/Commands/UnitCommands/MoveUnitCommand/MoveUnitCommand.h Game/UserInteraction/Logging/Logging.cpp Game/UserInteraction/Logging/Logging.h Game/UserInteraction/Logging/LoggingProxy/LoggingProxy.cpp Game/UserInteraction/Logging/LoggingProxy/LoggingProxy.h Game/UserInteraction/File/File.cpp Game/UserInteraction/File/File.h Game/UserInteraction/Logging/Adapter/Adapter.cpp Game/UserInteraction/Logging/Adapter/Adapter.h Game/UserInteraction/ChainOfResponsibility/LoggingLink/LoggingLink.cpp Game/UserInteraction/ChainOfResponsibility/LoggingLink/LoggingLink.h Game/UserInteraction/Commands/DefaultCommands/LoggingCommand/LoggingCommand.cpp Game/UserInteraction/Commands/DefaultCommands/LoggingCommand/LoggingCommand.h  Game/UserInteraction/Snapshot/Snapshot.cpp Game/UserInteraction/Snapshot/Snapshot.h Game/UserInteraction/File/File.cpp Game/UserInteraction/File/File.h Game/UserInteraction/ChainOfResponsibility/GameSaveLink/GameSaveLink.cpp Game/UserInteraction/ChainOfResponsibility/GameSaveLink/GameSaveLink.h Game/UserInteraction/Commands/DefaultCommands/GameSaveCommand/GameSaveCommand.cpp Game/UserInteraction/Commands/DefaultCommands/GameSaveCommand/GameSaveCommand.h Game/UserInteraction/Rules/Rule.cpp Game/UserInteraction/Rules/Rule.h Game/UserInteraction/Rules/States/IState.cpp Game/UserInteraction/Rules/States/IState.h Game/UserInteraction/Rules/RuleTwo/RuleTwo.cpp Game/UserInteraction/Rules/RuleTwo/RuleTwo.h Game/UserInteraction/Rules/RuleOne/RuleOne.cpp Game/UserInteraction/Rules/RuleOne/RuleOne.h Game/UserInteraction/Rules/States/StateBright/StateBright.cpp Game/UserInteraction/Rules/States/StateBright/StateBright.h Game/UserInteraction/Rules/States/StateDark/StateDark.cpp Game/UserInteraction/Rules/States/StateDark/StateDark.h Game/UserInteraction/Rules/States/StateUndead/StateUndead.cpp Game/UserInteraction/Rules/States/StateUndead/StateUndead.h)
+set(SOURCE_FILES
+        GameLib/Objects/Attributes/Damage/Damage.cpp
+        GameLib/Objects/Attributes/Damage/Damage.h
+        GameLib/Objects/Attributes/Health/Health.cpp
+        GameLib/Objects/Attributes/Health/Health.h
+        GameLib/Objects/Attributes/Mana/Mana.cpp
+        GameLib/Objects/Attributes/Mana/Mana.h
+        GameLib/Objects/Units/Magicians/Magician.cpp
+        GameLib/Objects/Units/Magicians/Magician.h
+        GameLib/Objects/Units/Shooters/Shooter.cpp
+        GameLib/Objects/Units/Shooters/Shooter.h
+        GameLib/Objects/Units/Warriors/Warrior.cpp
+        GameLib/Objects/Units/Warriors/Warrior.h
+        GameLib/Objects/Units/Magicians/Wizard/Wizard.cpp
+        GameLib/Objects/Units/Magicians/Wizard/Wizard.h
+        GameLib/Objects/Units/Shooters/Archer/Archer.cpp
+        GameLib/Objects/Units/Shooters/Archer/Archer.h
+        GameLib/Objects/Units/Shooters/Crossbowman/Crossbowman.cpp
+        GameLib/Objects/Units/Shooters/Crossbowman/Crossbowman.h
+        GameLib/Objects/Units/IUnit.cpp GameLib/Objects/Units/IUnit.h
+        GameLib/Objects/Object.cpp GameLib/Objects/Object.h
+        GameLib/Objects/Attributes/Range/Range.cpp
+        GameLib/Objects/Attributes/Range/Range.h
+        GameLib/Objects/Units/Warriors/Spearman/Spearman.cpp
+        GameLib/Objects/Units/Warriors/Spearman/Spearman.h
+        GameLib/Objects/Units/Warriors/Knight/Knight.cpp
+        GameLib/Objects/Units/Warriors/Knight/Knight.h
+        GameLib/Objects/Units/Warriors/Knight/Knight.cpp
+        GameLib/Objects/Units/Warriors/Knight/Knight.h
+        GameLib/Objects/Units/Magicians/Mage/Mage.cpp
+        GameLib/Objects/Units/Magicians/Mage/Mage.h
+        GameLib/GameField/Field/Field.cpp
+        GameLib/GameField/Field/Field.h
+        GameLib/GameField/Tile/Tile.cpp
+        GameLib/GameField/Tile/Tile.h
+        GameLib/Factories/ObjectFactory/ObjectFactory.cpp
+        GameLib/Factories/ObjectFactory/ObjectFactory.h
+        GameLib/GameField/Field/Iterator/FieldIterator.cpp
+        GameLib/GameField/Field/Iterator/FieldIterator.h
+        GameLib/Landscape/ILandscape.cpp
+        GameLib/Landscape/ILandscape.h
+        GameLib/Landscape/Water/Water.cpp
+        GameLib/Landscape/Water/Water.h
+        GameLib/Landscape/Mountain/Mountain.cpp
+        GameLib/Landscape/Mountain/Mountain.h
+        GameLib/Landscape/Forest/Forest.cpp
+        GameLib/Landscape/Forest/Forest.h
+        GameLib/Factories/LandscapeFactory/LandscapeFactory.cpp
+        GameLib/Factories/LandscapeFactory/LandscapeFactory.h
+        GameLib/Objects/Base/Base.cpp GameLib/Objects/Base/Base.h
+        GameLib/Objects/Base/Observer/IObserver.cpp
+        GameLib/Objects/Base/Observer/IObserver.h
+        GameLib/Objects/Base/Subject/Subject.cpp
+        GameLib/Objects/Base/Subject/Subject.h
+        GameLib/Objects/Units/UnitComposite/UnitComposite.cpp
+        GameLib/Objects/Units/UnitComposite/UnitComposite.h
+        GameLib/Objects/Neutral/INeutral.cpp
+        GameLib/Objects/Neutral/INeutral.h
+        GameLib/Strategies/INeutralStrategy.cpp
+        GameLib/Strategies/INeutralStrategy.h
+        GameLib/Objects/Neutral/AidKit/AidKit.cpp
+        GameLib/Objects/Neutral/AidKit/AidKit.h
+        GameLib/Objects/Neutral/Curse/Curse.cpp
+        GameLib/Objects/Neutral/Curse/Curse.h
+        GameLib/Objects/Neutral/Potion/Potion.cpp
+        GameLib/Objects/Neutral/Potion/Potion.h
+        GameLib/Objects/Neutral/Trap/Trap.cpp
+        GameLib/Objects/Neutral/Trap/Trap.h
+        GameLib/Strategies/AidKitStrategy/Refresh.cpp
+        GameLib/Strategies/AidKitStrategy/Refresh.h
+        GameLib/Strategies/CurseStrategy/Damn.cpp
+        GameLib/Strategies/CurseStrategy/Damn.h
+        GameLib/Strategies/PotionStrategy/ManaUp.cpp
+        GameLib/Strategies/PotionStrategy/ManaUp.h
+        GameLib/Strategies/TrapStrategy/HealthDown.cpp
+        GameLib/Strategies/TrapStrategy/HealthDown.h
+        GameLib/UserInteraction/GameClass/GameClass.cpp
+        GameLib/UserInteraction/GameClass/GameClass.h
+        GameLib/UserInteraction/ChainOfResponsibility/Chain.cpp
+        GameLib/UserInteraction/ChainOfResponsibility/Chain.h
+        GameLib/UserInteraction/ChainOfResponsibility/CreateUnitLink/CreateUnitLink.cpp
+        GameLib/UserInteraction/ChainOfResponsibility/CreateUnitLink/CreateUnitLink.h
+        GameLib/UserInteraction/ChainOfResponsibility/GetUnitLink/GetUnitLink.cpp
+        GameLib/UserInteraction/ChainOfResponsibility/GetUnitLink/GetUnitLink.h
+        GameLib/UserInteraction/ChainOfResponsibility/MoveUnitLink/MoveUnitLink.cpp
+        GameLib/UserInteraction/ChainOfResponsibility/MoveUnitLink/MoveUnitLink.h
+        GameLib/UserInteraction/ChainOfResponsibility/BaseInfoLink/BaseInfoLink.cpp
+        GameLib/UserInteraction/ChainOfResponsibility/BaseInfoLink/BaseInfoLink.h
+        GameLib/UserInteraction/ChainOfResponsibility/AttackUnitLink/AttackUnitLink.cpp
+        GameLib/UserInteraction/ChainOfResponsibility/AttackUnitLink/AttackUnitLink.h
+        GameLib/UserInteraction/ChainOfResponsibility/UnknownLink/UnknownLink.cpp
+        GameLib/UserInteraction/ChainOfResponsibility/UnknownLink/UnknownLink.h
+        GameLib/UserInteraction/Commands/ICommand.cpp
+        GameLib/UserInteraction/Commands/ICommand.h
+        GameLib/UserInteraction/Commands/DefaultCommands/UnknownCommand/UnknownCommand.cpp
+        GameLib/UserInteraction/Commands/DefaultCommands/UnknownCommand/UnknownCommand.h
+        GameLib/UserInteraction/Commands/BaseCommands/BaseInfoCommand/BaseInfoCommand.cpp
+        GameLib/UserInteraction/Commands/BaseCommands/BaseInfoCommand/BaseInfoCommand.h
+        GameLib/UserInteraction/Commands/UnitCommands/AttackUnitCommand/AttackUnitCommand.cpp
+        GameLib/UserInteraction/Commands/UnitCommands/AttackUnitCommand/AttackUnitCommand.h
+        GameLib/UserInteraction/Commands/UnitCommands/CreateUnitCommand/CreateUnitCommand.cpp
+        GameLib/UserInteraction/Commands/UnitCommands/CreateUnitCommand/CreateUnitCommand.h
+        GameLib/UserInteraction/Commands/UnitCommands/GetUnitCommand/GetUnitCommand.cpp
+        GameLib/UserInteraction/Commands/UnitCommands/GetUnitCommand/GetUnitCommand.h
+        GameLib/UserInteraction/Commands/UnitCommands/MoveUnitCommand/MoveUnitCommand.cpp
+        GameLib/UserInteraction/Commands/UnitCommands/MoveUnitCommand/MoveUnitCommand.h
+        GameLib/UserInteraction/Logging/Logging.cpp GameLib/UserInteraction/Logging/Logging.h
+        GameLib/UserInteraction/Logging/LoggingProxy/LoggingProxy.cpp
+        GameLib/UserInteraction/Logging/LoggingProxy/LoggingProxy.h
+        GameLib/UserInteraction/File/File.cpp
+        GameLib/UserInteraction/File/File.h
+        GameLib/UserInteraction/Logging/Adapter/Adapter.cpp
+        GameLib/UserInteraction/Logging/Adapter/Adapter.h
+        GameLib/UserInteraction/ChainOfResponsibility/LoggingLink/LoggingLink.cpp
+        GameLib/UserInteraction/ChainOfResponsibility/LoggingLink/LoggingLink.h
+        GameLib/UserInteraction/Commands/DefaultCommands/LoggingCommand/LoggingCommand.cpp
+        GameLib/UserInteraction/Commands/DefaultCommands/LoggingCommand/LoggingCommand.h
+        GameLib/UserInteraction/Snapshot/Snapshot.cpp
+        GameLib/UserInteraction/Snapshot/Snapshot.h
+        GameLib/UserInteraction/File/File.cpp
+        GameLib/UserInteraction/File/File.h
+        GameLib/UserInteraction/ChainOfResponsibility/GameSaveLink/GameSaveLink.cpp
+        GameLib/UserInteraction/ChainOfResponsibility/GameSaveLink/GameSaveLink.h
+        GameLib/UserInteraction/Commands/DefaultCommands/GameSaveCommand/GameSaveCommand.cpp
+        GameLib/UserInteraction/Commands/DefaultCommands/GameSaveCommand/GameSaveCommand.h
+        GameLib/UserInteraction/Rules/Rule.cpp GameLib/UserInteraction/Rules/Rule.h
+        GameLib/UserInteraction/Rules/States/IState.cpp
+        GameLib/UserInteraction/Rules/States/IState.h
+        GameLib/UserInteraction/Rules/RuleTwo/RuleTwo.cpp
+        GameLib/UserInteraction/Rules/RuleTwo/RuleTwo.h
+        GameLib/UserInteraction/Rules/RuleOne/RuleOne.cpp
+        GameLib/UserInteraction/Rules/RuleOne/RuleOne.h
+        GameLib/UserInteraction/Rules/States/StateBright/StateBright.cpp
+        GameLib/UserInteraction/Rules/States/StateBright/StateBright.h
+        GameLib/UserInteraction/Rules/States/StateDark/StateDark.cpp
+        GameLib/UserInteraction/Rules/States/StateDark/StateDark.h
+        GameLib/UserInteraction/Rules/States/StateUndead/StateUndead.cpp
+        GameLib/UserInteraction/Rules/States/StateUndead/StateUndead.h
+        GameLib/Exсeptions/Logical/LogicalError.cpp
+        GameLib/Exсeptions/Logical/LogicalError.h
+        GameLib/Exсeptions/OutOfRange/OutOfRangeError.cpp
+        GameLib/Exсeptions/OutOfRange/OutOfRangeError.h
+        GameLib/Exсeptions/Type/TypeError.cpp
+        GameLib/Exсeptions/Type/TypeError.h
+        GameLib/UserInteraction/Commands/DefaultCommands/SkipCommand/SkipCommand.cpp
+        GameLib/UserInteraction/Commands/DefaultCommands/SkipCommand/SkipCommand.h
+        GameLib/UserInteraction/ChainOfResponsibility/SkipLink/SkipLink.cpp
+        GameLib/UserInteraction/ChainOfResponsibility/SkipLink/SkipLink.h
+)
+
+
+set(TEST_FILES
+        GameCatchTests/catch.hpp
+        GameCatchTests/FieldTest.cpp
+        GameCatchTests/BaseTest.cpp
+        )
+
+add_executable(GAME
+        #GameLib/main.cpp
+        ${TEST_FILES}
+        ${SOURCE_FILES}
+)
